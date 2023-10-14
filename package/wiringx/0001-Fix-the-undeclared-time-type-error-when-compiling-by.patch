@@ -1,0 +1,47 @@
+From 3185311331f8fb90ce5dd9376e8b35bff4bb083f Mon Sep 17 00:00:00 2001
+From: Hanyuan Zhao <hanyuan-z@qq.com>
+Date: Sat, 14 Oct 2023 14:46:15 +0800
+Subject: [PATCH] Fix the undeclared time type error when compiling by
+ buildroot
+
+Signed-off-by: Hanyuan Zhao <hanyuan-z@qq.com>
+---
+ src/wiringx.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/src/wiringx.c b/src/wiringx.c
+index e831caa..b424c5b 100644
+--- a/src/wiringx.c
++++ b/src/wiringx.c
+@@ -119,8 +119,8 @@ static void delayMicrosecondsHard(unsigned int howLong) {
+ 	tLong.tv_sec  = howLong / 1000000;
+ 	tLong.tv_usec = howLong % 1000000;
+ #else
+-	tLong.tv_sec  = (__time_t)howLong / 1000000;
+-	tLong.tv_usec = (__suseconds_t)howLong % 1000000;
++	tLong.tv_sec  = (time_t)howLong / 1000000;
++	tLong.tv_usec = (suseconds_t)howLong % 1000000;
+ #endif
+ 	timeradd(&tNow, &tLong, &tEnd);
+ 
+@@ -135,7 +135,7 @@ EXPORT void delayMicroseconds(unsigned int howLong) {
+ 	long int uSecs = howLong % 1000000;
+ 	unsigned int wSecs = howLong / 1000000;
+ #else
+-	long int uSecs = (__time_t)howLong % 1000000;
++	long int uSecs = (time_t)howLong % 1000000;
+ 	unsigned int wSecs = howLong / 1000000;
+ #endif
+ 
+@@ -147,7 +147,7 @@ EXPORT void delayMicroseconds(unsigned int howLong) {
+ #ifdef _WIN32
+ 		sleeper.tv_sec = wSecs;
+ #else
+-		sleeper.tv_sec = (__time_t)wSecs;	
++		sleeper.tv_sec = (time_t)wSecs;
+ #endif
+ 		sleeper.tv_nsec = (long)(uSecs * 1000L);
+ 		nanosleep(&sleeper, NULL);
+-- 
+2.34.1
+
