@@ -28,7 +28,22 @@ $  make milkv_duo_musl_riscv64_defconfig
 $  make
 ```
 
-The format is `milkv_duo_{{C Library}}_{{Compile Toolchain}}_defconfig`.
+By default, a portion of the RAM is allocated to ION, which is the memory used when running algorithms with the camera. If you are not using the camera, please try:
+
+```shell
+$  make milkv_duo_musl_riscv64_64mb_defconfig
+$  make
+```
+
+To have all the 64mb free memory.
+
+
+To configure the kernel or u-boot or others, please try:
+
+```shell
+$  make linux-menuconfig # act like kernel's make menuconfig
+$  make linux-rebuild
+```
 
 ## Usage of the sdcard.img
 
