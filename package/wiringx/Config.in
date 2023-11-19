@@ -1,0 +1,18 @@
+config BR2_PACKAGE_WIRINGX
+	bool "wiringX"
+	help
+	  wiringX is a cross-platform GPIO interface that allows
+	  developers to control the GPIO of various platforms with
+	  generic and uniform functions. By using wiringX, the same
+	  code will run on all platforms supported by wiringX.
+
+	  Supported vendors:
+
+	  allwinner = <a10, a31s, h3, h5>
+	  amlogic = <s805, s905>
+	  broadcom = <bcm2711, bcm2835, bcm2836>
+	  nXP = <imx6dqrm, imx6sdlrm>
+	  rockchip = <rk3399>
+	  samsung = <exynos5422>
+
+	  https://wiringx.org/
