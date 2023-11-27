@@ -14,7 +14,6 @@ BR2_GLOBAL_PATCH_DIR="board/milkv/duo/patches"
 BR2_TARGET_GENERIC_HOSTNAME="milkv-duo"
 BR2_TARGET_GENERIC_ISSUE="Welcome to Milk-V"
 BR2_TARGET_GENERIC_ROOT_PASSWD="milkv"
-BR2_ROOTFS_OVERLAY="board/milkv/duo/overlay"
 BR2_ROOTFS_POST_IMAGE_SCRIPT="board/milkv/duo/post-image.sh"
 BR2_LINUX_KERNEL=y
 BR2_LINUX_KERNEL_CUSTOM_GIT=y
