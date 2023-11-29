@@ -38,6 +38,15 @@ config BR2_PACKAGE_MILKV_DUO_PINMUX
 config BR2_PACKAGE_MILKV_DUO_FEATURES
 	bool "Duo USB Features"
 	default n
+	select BR2_PACKAGE_GREP
+	select BR2_PACKAGE_TREE
+	select BR2_PACKAGE_DHCPCD
+	select BR2_PACKAGE_DNSMASQ
+	select BR2_PACKAGE_DROPBEAR
+	select BR2_PACKAGE_LRZSZ
+	select BR2_PACKAGE_NEOFETCH
+	select BR2_PACKAGE_WHICH
+	select BR2_PACKAGE_HTOP
 	help
 	  Say Y to this will copy the cvitek usb shell scripts to have
 	  the USB features. The role could be configured at
@@ -46,6 +55,8 @@ config BR2_PACKAGE_MILKV_DUO_FEATURES
 
 	  Supported usb functions are rndis, host and mass-storage.
 	  By default Duo has the LED blinking. It could be configured
-	  in that conf file as well.
+	  in that conf file as well. Say Y to this will also select
+	  some packages automatically, to have the same experience
+	  with the official release.
 
 endif
