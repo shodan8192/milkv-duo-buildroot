@@ -4,7 +4,7 @@ Intro
 =====
 
 Milk-V Duo is an ultra-compact embedded development platform
-based on the rv64 CV1800B chip.It can run Linux and RTOS,
+based on the rv64 CV1800B chip. It can run Linux and RTOS,
 providing a reliable, cost-effective, and high-performance
 platform for professionals, industrial ODMs, AIoT enthusiasts,
 DIY enthusiasts, and creators.
