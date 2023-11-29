@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-MILKV_DUO_FIRMWARE_FSBL_VERSION = c0d279ad5f2432ad62a4da6b7f42f0e0aa389d5c
+MILKV_DUO_FIRMWARE_FSBL_VERSION = 3e58f21017381cd2eafdfeb04038a2cca98217b7
 MILKV_DUO_FIRMWARE_FSBL_SITE = $(call github,milkv-duo,milkv-duo-firmware-fsbl,$(MILKV_DUO_FIRMWARE_FSBL_VERSION))
 MILKV_DUO_FIRMWARE_FSBL_INSTALL_STAGING = YES
 MILKV_DUO_FIRMWARE_FSBL_DEPENDENCIES = host-python3 host-mtools
@@ -21,6 +21,11 @@ define MILKV_DUO_FIRMWARE_FSBL_BUILD_CMDS
 	CROSS_COMPILE=$(TARGET_CROSS) \
 	FREE_RAM_SIZE=$(MILKV_DUO_FIRMWARE_FSBL_64MB) \
 	bl2
+
+	ifeq ($(BR2_PACKAGE_MILKV_DUO_PINMUX),y)
+		$(TARGET_MAKE_ENV) $(TARGET_CC) $(TARGET_CFLAGS) $(TARGET_LDFLAGS) \
+		-I $(@D)/tools/pinmux/include $(@D)/tools/pinmux/src/*.c -o $(@D)/tools/pinmux/duo-pinmux
+	endif
 endef
 
 define MILKV_DUO_FIRMWARE_FSBL_INSTALL_STAGING_CMDS
@@ -29,6 +34,14 @@ define MILKV_DUO_FIRMWARE_FSBL_INSTALL_STAGING_CMDS
 	$(INSTALL) -D -m 0755 $(@D)/plat/cv180x/fiptool.py $(BINARIES_DIR)/fiptool.py
 	$(INSTALL) -D -m 0644 $(@D)/plat/cv180x/multi.its $(BINARIES_DIR)/multi.its
 	$(INSTALL) -D -m 0755 $(@D)/test/cv181x/ddr_param.bin $(BINARIES_DIR)/ddr_param.bin
+
+	ifeq ($(BR2_PACKAGE_MILKV_DUO_PINMUX),y)
+		$(INSTALL) -D -m 0755 $(@D)/tools/pinmux/duo-pinmux $(TARGET_DIR)/usr/bin/
+	endif
+
+	ifeq ($(BR2_PACKAGE_MILKV_DUO_FEATURES),y)
+		cp $(@D)/tools/overlay/* -r $(TARGET_DIR)
+	endif
 endef
 
 $(eval $(generic-package))

@@ -24,4 +24,28 @@ config BR2_PACKAGE_MILKV_DUO_FIRMWARE_FSBL_64MB
 	  Say Y to this will disable the ION in order to
 	  have the all 64MiB Free memory.
 
+config BR2_PACKAGE_MILKV_DUO_PINMUX
+	bool "duo-pinmux tool"
+	default n
+	help
+	  Say Y to this will compile the duo-pinmux, which can
+	  get or set function of any Milk-V Duo GPIO Pin. More info at
+
+	  https://milkv.io/docs/duo/application-development/pinmux
+
+	  https://github.com/shodan8192/milkv-duo-pinmux
+
+config BR2_PACKAGE_MILKV_DUO_FEATURES
+	bool "Duo USB Features"
+	default n
+	help
+	  Say Y to this will copy the cvitek usb shell scripts to have
+	  the USB features. The role could be configured at
+
+	  /etc/milkv-duo.conf
+
+	  Supported usb functions are rndis, host and mass-storage.
+	  By default Duo has the LED blinking. It could be configured
+	  in that conf file as well.
+
 endif
