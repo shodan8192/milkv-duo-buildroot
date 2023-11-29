@@ -16,10 +16,11 @@ Configure Buildroot:
 
     $ make milkv_duo_musl_riscv64_defconfig
 
-Note that by default some RAM will be set for the ION camera use.
-If you expect to have all the 64MiB free RAM, please try:
+The milkv_duo_musl_riscv64_defconfig will by default provide
+the full 64MiB free RAM. If you want to build with memory
+reserved for ION, please try:
 
-    $ make milkv_duo_musl_riscv64_64mb_defconfig
+    $ make milkv_duo_musl_riscv64_ion_defconfig
 
 Modify configuration if needed, e.g. add more packages to target:
 
