@@ -22,10 +22,10 @@ define MILKV_DUO_FIRMWARE_FSBL_BUILD_CMDS
 	FREE_RAM_SIZE=$(MILKV_DUO_FIRMWARE_FSBL_64MB) \
 	bl2
 
-	ifeq ($(BR2_PACKAGE_MILKV_DUO_PINMUX),y)
+	if [ $(BR2_PACKAGE_MILKV_DUO_PINMUX) = y ]; then \
 		$(TARGET_MAKE_ENV) $(TARGET_CC) $(TARGET_CFLAGS) $(TARGET_LDFLAGS) \
-		-I $(@D)/tools/pinmux/include $(@D)/tools/pinmux/src/*.c -o $(@D)/tools/pinmux/duo-pinmux
-	endif
+		-I $(@D)/tools/pinmux/include $(@D)/tools/pinmux/src/*.c -o $(@D)/tools/pinmux/duo-pinmux; \
+	fi
 endef
 
 define MILKV_DUO_FIRMWARE_FSBL_INSTALL_STAGING_CMDS
@@ -35,13 +35,13 @@ define MILKV_DUO_FIRMWARE_FSBL_INSTALL_STAGING_CMDS
 	$(INSTALL) -D -m 0644 $(@D)/plat/cv180x/multi.its $(BINARIES_DIR)/multi.its
 	$(INSTALL) -D -m 0755 $(@D)/test/cv181x/ddr_param.bin $(BINARIES_DIR)/ddr_param.bin
 
-	ifeq ($(BR2_PACKAGE_MILKV_DUO_PINMUX),y)
-		$(INSTALL) -D -m 0755 $(@D)/tools/pinmux/duo-pinmux $(TARGET_DIR)/usr/bin/
-	endif
+	if [ $(BR2_PACKAGE_MILKV_DUO_PINMUX) = y ]; then \
+		$(INSTALL) -D -m 0755 $(@D)/tools/pinmux/duo-pinmux $(TARGET_DIR)/usr/bin/; \
+	fi
 
-	ifeq ($(BR2_PACKAGE_MILKV_DUO_FEATURES),y)
-		cp $(@D)/tools/overlay/* -r $(TARGET_DIR)
-	endif
+	if [ $(BR2_PACKAGE_MILKV_DUO_FEATURES) = y ]; then \
+		cp $(@D)/tools/overlay/* -r $(TARGET_DIR); \
+	fi
 endef
 
 $(eval $(generic-package))
