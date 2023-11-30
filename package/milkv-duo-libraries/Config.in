@@ -1,6 +1,14 @@
+config BR2_PACKAGE_MILKV_DUO_LIBRARIES
+	bool "milk-v duo libraries"
+	depends on BR2_riscv
+	help
+	  Those packages provide board-specific hardware tools and
+	  firmware for the Milk-V Duo platform.
+
+if BR2_PACKAGE_MILKV_DUO_LIBRARIES
+
 config BR2_PACKAGE_MILKV_DUO_FIRMWARE_FSBL
 	bool "milkv-duo-firmware-fsbl"
-	depends on BR2_riscv
 	select BR2_PACKAGE_HOST_MTOOLS
 	help
 	  This package is obtained from
@@ -15,10 +23,9 @@ config BR2_PACKAGE_MILKV_DUO_FIRMWARE_FSBL
 
 	  https://github.com/gtxzsxxk/milkv-duo-firmware-fsbl
 
-if BR2_PACKAGE_MILKV_DUO_FIRMWARE_FSBL
-
 config BR2_PACKAGE_MILKV_DUO_FIRMWARE_FSBL_64MB
 	bool "64 MiB Free RAM"
+	depends on BR2_PACKAGE_MILKV_DUO_FIRMWARE_FSBL
 	default n
 	help
 	  Say Y to this will disable the ION in order to
