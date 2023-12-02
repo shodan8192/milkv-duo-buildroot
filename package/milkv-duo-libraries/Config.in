@@ -24,7 +24,7 @@ config BR2_PACKAGE_MILKV_DUO_FIRMWARE_FSBL
 	  https://github.com/gtxzsxxk/milkv-duo-firmware-fsbl
 
 config BR2_PACKAGE_MILKV_DUO_FIRMWARE_FSBL_64MB
-	bool "64 MiB Free RAM"
+	bool "64 MiB free ram"
 	depends on BR2_PACKAGE_MILKV_DUO_FIRMWARE_FSBL
 	default n
 	help
@@ -43,17 +43,12 @@ config BR2_PACKAGE_MILKV_DUO_PINMUX
 	  https://github.com/shodan8192/milkv-duo-pinmux
 
 config BR2_PACKAGE_MILKV_DUO_FEATURES
-	bool "Duo USB Features"
+	bool "duo usb features"
 	default n
-	select BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
-	select BR2_PACKAGE_GREP
-	select BR2_PACKAGE_TREE
 	select BR2_PACKAGE_DHCPCD
 	select BR2_PACKAGE_DNSMASQ
 	select BR2_PACKAGE_DROPBEAR
 	select BR2_PACKAGE_LRZSZ
-	select BR2_PACKAGE_NEOFETCH
-	select BR2_PACKAGE_WHICH
 	select BR2_PACKAGE_HTOP
 	help
 	  Say Y to this will copy the cvitek usb shell scripts to have
