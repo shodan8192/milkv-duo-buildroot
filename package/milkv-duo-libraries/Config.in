@@ -25,8 +25,8 @@ config BR2_PACKAGE_MILKV_DUO_FIRMWARE_FSBL
 
 config BR2_PACKAGE_MILKV_DUO_FIRMWARE_FSBL_64MB
 	bool "64 MiB free ram"
-	depends on BR2_PACKAGE_MILKV_DUO_FIRMWARE_FSBL
 	default n
+	depends on BR2_PACKAGE_MILKV_DUO_FIRMWARE_FSBL
 	help
 	  Say Y to this will disable the ION in order to
 	  have the all 64MiB Free memory.
